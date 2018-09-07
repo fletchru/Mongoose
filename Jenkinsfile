@@ -18,6 +18,6 @@ pipeline {
 				sh "./gradlew dist"
 				archiveArtifacts artifacts: 'build/dist/*.tgz', fingerprint: true
 			}
-		}		
+		}
 	}
 }
