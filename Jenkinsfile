@@ -1,15 +1,15 @@
 pipeline {	
-	agent none
+	agent any
 	stages {
 		stage('Clone sources') {
-			agent any
+			//agent any
 			steps {
 				cleanWs()
 				git url: 'https://github.com/emc-mongoose/mongoose.git'
 			}			
 		}
 		stage('Build') {
-			agent any
+			//agent any
 			steps {
 				println pwd()
 				//sh "'${tool 'Gradle 3.5'}/bin/gradle' clean build"
@@ -17,7 +17,7 @@ pipeline {
 			}			
 		}
 		stage('Test and report') {
-			agent any
+			//agent any
 			steps {
 				//sh "'${tool 'Gradle 3.5'}/bin/gradle' :tests:unit:test"
 				sh "./gradlew :tests:unit:test"
@@ -25,7 +25,7 @@ pipeline {
 			}			
 		}
 		stage('Archive artifacts') {
-			agent any
+			//agent any
 			environment {
 				files = findFiles(glob: 'build/libs/mongoose-*.jar')				
 			}
