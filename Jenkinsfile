@@ -20,7 +20,7 @@ pipeline {
 		}
 		stage('Test') {
             steps {
-				println dockerFingerprintRun 'hello-world'
+				dockerFingerprintRun 'hello-world'
             }
         }
 	}
