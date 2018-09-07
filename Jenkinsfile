@@ -4,6 +4,7 @@ pipeline {
 		stage('Clone sources') {
 			agent any
 			steps {
+				cleanWs()
 				git url: 'https://github.com/emc-mongoose/mongoose.git'
 			}			
 		}
@@ -11,14 +12,15 @@ pipeline {
 			agent any
 			steps {
 				println pwd()
-				sh "'${tool 'Gradle 3.5'}/bin/gradle' clean build"
-				//sh "./gradlew clean build"
+				//sh "'${tool 'Gradle 3.5'}/bin/gradle' clean build"
+				sh "./gradlew clean dist"
 			}			
 		}
 		stage('Test and report') {
 			agent any
 			steps {
-				sh "'${tool 'Gradle 3.5'}/bin/gradle' :tests:unit:test"
+				//sh "'${tool 'Gradle 3.5'}/bin/gradle' :tests:unit:test"
+				sh "./gradlew :tests:unit:test"
 				step $class: 'JUnitResultArchiver', allowEmptyResults: true, testResults: '**/unit/build/test-results/test/TEST-*.xml'
 			}			
 		}
