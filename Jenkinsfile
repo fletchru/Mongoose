@@ -20,7 +20,7 @@ pipeline {
 		}
 		stage('Test') {
             steps {
-				dockerFingerprintRun 'hello-world'
+				dockerFingerprintRun containerId: 'hello-world', toolName: 'Docker_Default'
             }
         }
 	}
