@@ -22,16 +22,17 @@ pipeline {
 		}
 		stage('Archive artifacts') {
 			agent any
-			steps {
-				def files = findFiles(glob: 'build/libs/mongoose-*.jar')
+			environment {
+				files = findFiles(glob: 'build/libs/mongoose-*.jar')
 				files += findFiles(glob: '**/mongoose-storage-driver-service-*.jar')
-
+			}
+			steps {
 				files.each {
 					def archiveFileName = "${it.name.replace("jar", "tgz")}"
 					sh "tar -cvzf " + archiveFileName + " ${it.path}"
 					archiveArtifacts artifacts: archiveFileName, fingerprint: true
 				}
-			}			
+			}
 		}
 	}
 }
