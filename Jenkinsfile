@@ -20,11 +20,12 @@ pipeline {
 		}
 		stage('Front-end') {
 			agent {
-                docker { image 'node:7-alpine' }
-            }
-            steps {
-                sh 'node --version'
-            }
+				// Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+				dockerfile {
+					filename 'Dockerfile.base'
+					dir 'docker'
+				}
+			}
         }
 	}
 }
