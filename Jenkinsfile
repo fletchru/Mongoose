@@ -32,5 +32,16 @@ pipeline {
 		//		sh "docker build -f docker/Dockerfile.base -t commit ."
 		//	}
         //}
+		stage('Build from Dockerfile') {
+			agent {
+				dockerfile {
+					filename 'Dockerfile.base'
+					dir 'docker'
+				}
+			}
+			steps {
+				
+			}
+		}
 	}
 }
