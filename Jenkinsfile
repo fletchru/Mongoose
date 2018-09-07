@@ -3,8 +3,7 @@ pipeline {
 	stages {
 		stage('Clone sources') {
 			//agent any
-			steps {
-				cleanWs()
+			steps {				
 				git url: 'https://github.com/emc-mongoose/mongoose.git'
 			}			
 		}
@@ -25,20 +24,7 @@ pipeline {
 			}			
 		}
 		stage('Archive artifacts') {
-			//agent any
-			environment {
-				files = findFiles(glob: 'build/libs/mongoose-*.jar')				
-			}
-			steps {				
-				script {
-					files += findFiles(glob: '**/mongoose-storage-driver-service-*.jar')
-					files.each {
-						def archiveFileName = "${it.name.replace("jar", "tgz")}"
-						sh "tar -cvzf " + archiveFileName + " ${it.path}"
-						archiveArtifacts artifacts: archiveFileName, fingerprint: true
-					}
-				}
-			}
+			archiveArtifacts artifacts: 'build/dist/*.tgz', fingerprint: true
 		}
 	}
 }
