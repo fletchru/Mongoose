@@ -18,11 +18,19 @@ pipeline {
 				archiveArtifacts artifacts: 'build/dist/*.tgz', fingerprint: true
 			}
 		}
-		stage('Front-end') {
-			steps {
-				sh "docker ps -a"
-				sh "docker build -f docker/Dockerfile.base -t commit ."
+		stage('Test') {
+			agent {
+				docker { image 'node:7-alpine' }
 			}
+            steps {
+                sh 'node --version'
+            }
         }
+		//stage('Front-end') {
+		//	steps {
+		//		sh "docker ps -a"
+		//		sh "docker build -f docker/Dockerfile.base -t commit ."
+		//	}
+        //}
 	}
 }
