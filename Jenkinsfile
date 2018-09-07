@@ -2,8 +2,7 @@ pipeline {
 	agent any
 	stages {
 		stage('Clone sources') {
-			steps {
-				cleanWs()
+			steps {				
 				git url: 'https://github.com/emc-mongoose/mongoose.git'
 			}
 		}
