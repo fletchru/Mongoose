@@ -24,7 +24,9 @@ pipeline {
 			}			
 		}
 		stage('Archive artifacts') {
-			archiveArtifacts artifacts: 'build/dist/*.tgz', fingerprint: true
+			steps {
+				archiveArtifacts artifacts: 'build/dist/*.tgz', fingerprint: true
+			}
 		}
 	}
 }
