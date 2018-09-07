@@ -19,12 +19,8 @@ pipeline {
 			}
 		}
 		stage('Front-end') {
-			agent {
-				// Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-				dockerfile {
-					filename 'Dockerfile.base'
-					dir 'docker'
-				}
+			steps {
+				sh "docker ps -a"
 			}
         }
 	}
