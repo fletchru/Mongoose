@@ -21,6 +21,7 @@ pipeline {
 		stage('Front-end') {
 			steps {
 				sh "docker ps -a"
+				sh "docker build -f docker/Dockerfile.base"
 			}
         }
 	}
