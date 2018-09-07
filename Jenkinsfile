@@ -25,13 +25,15 @@ pipeline {
 			environment {
 				files = findFiles(glob: 'build/libs/mongoose-*.jar')				
 			}
-			steps {
-				files += findFiles(glob: '**/mongoose-storage-driver-service-*.jar')
-				files.each {
-					def archiveFileName = "${it.name.replace("jar", "tgz")}"
-					sh "tar -cvzf " + archiveFileName + " ${it.path}"
-					archiveArtifacts artifacts: archiveFileName, fingerprint: true
-				}
+			steps {				
+				script {
+					files += findFiles(glob: '**/mongoose-storage-driver-service-*.jar')
+					files.each {
+						def archiveFileName = "${it.name.replace("jar", "tgz")}"
+						sh "tar -cvzf " + archiveFileName + " ${it.path}"
+						archiveArtifacts artifacts: archiveFileName, fingerprint: true
+					}
+				}				
 			}
 		}
 	}
