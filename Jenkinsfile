@@ -6,7 +6,7 @@ pipeline {
 				git url: 'https://github.com/emc-mongoose/mongoose.git'
 			}
 		}
-		stage('Test and report') {
+		stage('Unit tests and results') {
 			steps {
 				sh "./gradlew clean :tests:unit:test"
 				step $class: 'JUnitResultArchiver', allowEmptyResults: true, testResults: '**/unit/build/test-results/test/TEST-*.xml'
