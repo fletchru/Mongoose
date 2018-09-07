@@ -10,8 +10,9 @@ pipeline {
 		stage('Build') {
 			agent any
 			steps {
-				//sh "'${tool 'Gradle 3.5'}/bin/gradle' clean build"
-				sh "./gradlew clean build"
+				pwd()
+				sh "'${tool 'Gradle 3.5'}/bin/gradle' clean build"
+				//sh "./gradlew clean build"
 			}			
 		}
 		stage('Test and report') {
