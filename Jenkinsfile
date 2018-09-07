@@ -33,12 +33,10 @@ pipeline {
 		//	}
         //}
 		stage('Build from Dockerfile') {
-			agent {
-				dockerfile {
+			dockerfile {
 					filename 'Dockerfile.base'
 					dir 'docker'
 				}
-			}
 			steps {
 				sh "docker ps -a"
 			}
