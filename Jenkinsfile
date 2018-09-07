@@ -18,9 +18,12 @@ pipeline {
 				archiveArtifacts artifacts: 'build/dist/*.tgz', fingerprint: true
 			}
 		}
-		stage('Test') {
+		stage('Front-end') {
+			agent {
+                docker { image 'node:7-alpine' }
+            }
             steps {
-				dockerFingerprintRun containerId: 'hello-world', toolName: 'Docker_Default'
+                sh 'node --version'
             }
         }
 	}
