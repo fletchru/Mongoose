@@ -33,10 +33,12 @@ pipeline {
 		//	}
         //}
 		stage('Build from Dockerfile') {
-			dockerfile {
+			agent {
+				dockerfile {
 					filename 'Dockerfile.base'
-					dir 'docker'
+					dir '/var/lib/jenkins/workspace/mongoose/docker'
 				}
+			}
 			steps {
 				sh "docker ps -a"
 			}
